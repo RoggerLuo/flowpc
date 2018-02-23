@@ -1,14 +1,13 @@
-import dva from 'dva';
 import './index.css';
-
+import app from './app'
 // 1. Initialize
-const app = dva();
 
 // 2. Plugins
 // app.use({});
 
 // 3. Model
-// app.model(require('./models/example').default);
+app.model(require('./models/data').default);
+app.model(require('./models/edit').default);
 
 // 4. Router
 app.router(require('./router').default);
