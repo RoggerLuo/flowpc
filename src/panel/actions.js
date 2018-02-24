@@ -13,9 +13,11 @@ export function save() {
 export function _new() {
     const dis = global.app._store.dispatch
     dis({ type: 'edit/_new' })
+    console.log('new...')
 }
 
 export function del(){
     const dis = global.app._store.dispatch
     dis({ type: 'edit/del' })
+    console.log('del...')
 }
