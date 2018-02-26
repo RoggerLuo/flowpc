@@ -11,7 +11,7 @@ document.body.onkeydown = bindKeyboard
 function IndexPanel() {
   return (
     <div style={{height:'100%',display:'flex'}} >
-      <div className={s.scrollbar} style={{height:'100%',width:'32.2%',borderRight:'0.5px solid #ccc',overflowY:'auto'}}>
+      <div className={s.scrollbar} style={{height:'100%',width:'32.2%',overflowY:'auto'}}>
         <Search />
         <Notes />
       </div>

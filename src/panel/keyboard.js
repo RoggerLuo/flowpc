@@ -1,22 +1,31 @@
-import { save, _new, del } from './actions'
+import { save, _new, del, moveup, movedown } from './actions'
 
-const withMeta = (event, preset_keyCode, cb) => {
-  const { ctrlKey, metaKey, keyCode } = event
-  if ((ctrlKey || metaKey)) {
-    if (keyCode === preset_keyCode){
-        cb()
-        event.preventDefault()
-    } 
-  }
+const keyboard = (event) => {
+    const { ctrlKey, metaKey, keyCode } = event
+    const withMeta = (preset_keyCode, cb) => {
+        if ((ctrlKey || metaKey)) {
+            if (keyCode === preset_keyCode) {
+                cb()
+                event.preventDefault()
+            }
+        }
+    }
+    const withoutMeta = (preset_keyCode, cb) => {
+        if (!(ctrlKey || metaKey)) {
+            if (keyCode === preset_keyCode) {
+                cb()
+                event.preventDefault()
+            }
+        }
+    }
+    return { withMeta, withoutMeta }
 }
 
-const ctrl_s = (event) => withMeta(event, 83, save)
-const ctrl_n = (event) => withMeta(event, 78, _new)
-const ctrl_d = (event) => withMeta(event, 68, del)
-
-export default function(event){
-    // ctrl n, command n无法做到
-    ctrl_s(event)
-    ctrl_n(event)
-    ctrl_d(event)
+export default function(event) { 
+    const kb = keyboard(event)
+    kb.withMeta(83, save) //ctrl_s
+    kb.withMeta(78, _new) //ctrl_n  // command n无法做到
+    kb.withMeta(68, del) //ctrl_d
+    kb.withoutMeta(38, moveup) //press_up
+    kb.withoutMeta(40, movedown) //press_down
 }
