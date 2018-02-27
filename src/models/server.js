@@ -14,7 +14,9 @@ export default {
         },
     },
     effects: {
-        * post({ itemId, content }, { call, put }) {
+        * post({ note }, { call, put }) {
+            const itemId = note[1]
+            const content = note[2]
             yield call( post, itemId, content)
         },
         * delete({ itemId }, { call, put }) {

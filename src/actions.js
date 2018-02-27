@@ -1,17 +1,4 @@
-const dis = global.app._store.dispatch
-function findCurrentNote(){
-    const state = global.app._store.getState()
-    const itemId = state.localData.itemId
-    let target = false
-    state.localData.notes.some(el => {
-        if(el[1] == itemId){
-            target = el
-            return true            
-        }
-        return false
-    })
-    return target
-}
+const rdx = global.rdx
 
 export function editorFocus(){
     const editor = document.getElementById('editor')
@@ -32,53 +19,48 @@ function debounce(fn, delay) {
 
 export function serverSave(){
     console.log('serverSave ...')
-    const note = findCurrentNote()
-    dis({ type: 'server/post', note })
+    const note = rdx.findCurrentNote()
+    rdx.dispatch({ type: 'server/post', note })
 }
 
 export function onChange(event) {
-    const dis = global.app._store.dispatch
-    dis({ type: 'localData/modify_note_content', content: event.target.value })
+    rdx.dispatch({ type: 'localData/modify_note_content', content: event.target.value })
     debounce(serverSave,300)()
 }
 
 export function clickNote(itemId, content) {
-    const dis = global.app._store.dispatch
-    dis({ type: 'localData/load', itemId, content })
+    rdx.dispatch({ type: 'localData/load', itemId, content })
 }
 
 export function _new() {
     const itemId = Date.parse(new Date()) / 1000
-    const dis = global.app._store.dispatch
-    dis({ type: 'localData/createNote', itemId })
+    rdx.dispatch({ type: 'localData/createNote', itemId })
     editorFocus()
-    // dis({ type: 'server/post', itemId, content:'a 123'})
+    // rdx.dispatch({ type: 'server/post', itemId, content:'a 123'})
 }
 
 export function del() {
     if(!window.confirm("confirm delete?")) return
-    const dis = global.app._store.dispatch
     const state = global.app._store.getState()
     const itemId = state.localData.itemId
     state.localData.notes.some((el,ind,arr)=>{
         if(el[1].toString() === itemId.toString()){
             if(ind === 0){ //是最前
-                dis({ type: 'localData/loadnext' })
+                rdx.dispatch({ type: 'localData/loadnext' })
                 return true
             }
             //是普通 或者 是最后
-            dis({ type: 'localData/loadlast' })
+            rdx.dispatch({ type: 'localData/loadlast' })
             return true
         }
         return false
     })    
-    dis({ type: 'localData/deleteNote', itemId }) //删除原始的id
-    dis({ type: 'server/delete', itemId})
+    rdx.dispatch({ type: 'localData/deleteNote', itemId }) //删除原始的id
+    rdx.dispatch({ type: 'server/delete', itemId})
 }
 
 export function moveup() {
-    const dis = global.app._store.dispatch
-    dis({ type: 'localData/loadlast' })
+    rdx.dispatch({ type: 'localData/loadlast' })
     const noteDom = document.getElementsByClassName('selectedNote')[0]
     if (noteDom) {
         const top = noteDom.offsetTop
@@ -91,8 +73,7 @@ export function moveup() {
 }
 
 export function movedown() {
-    const dis = global.app._store.dispatch
-    dis({ type: 'localData/loadnext' })
+    rdx.dispatch({ type: 'localData/loadnext' })
     const noteDom = document.getElementsByClassName('selectedNote')[0]
     if (noteDom) {
         const top = noteDom.offsetTop

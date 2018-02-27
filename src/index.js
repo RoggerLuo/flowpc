@@ -1,5 +1,6 @@
 import './index.css';
 import app from './app'
+import './rdx'
 // 1. Initialize
 
 // 2. Plugins
