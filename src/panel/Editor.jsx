@@ -1,8 +1,9 @@
 import React from 'react'
 import { connect } from 'dva'
 import { Input } from 'antd'
-import { onChange } from './actions'
+//import { onChange } from './actions'
 const { TextArea } = Input
+const flow = global.flow
 
 function Editor({ content }) {
   return (
@@ -11,7 +12,7 @@ function Editor({ content }) {
             style={{fontSize:'17px',color:'black',border:'none',backgroundColor:'white'}} 
             placeholder="put text..." 
             value={content}
-            onChange={onChange}
+            onChange={flow.actions.onChange}
             id="editor"
         />
     </div>

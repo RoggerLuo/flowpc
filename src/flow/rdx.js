@@ -1,5 +1,5 @@
 const rdx = {}
-rdx.dispatch = global.app._store.dispatch
+
 rdx.findCurrentNote = () => {
     const state = global.app._store.getState()
     const itemId = state.localData.itemId
