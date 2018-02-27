@@ -22,9 +22,30 @@ function checkStatus(response) {
  * @return {object}           An object containing either "data" or "err"
  */
 export default function request(url, options) {
-  return fetch(url, options)
+
+  const optionsCloned = Object.assign({},options)
+  if (options.method === "POST") {
+      const postdata = new FormData()
+      postdata.append("content", options.body.content)
+      optionsCloned.body = postdata
+      // optionsCloned.body = JSON.stringify(options.body)
+      // optionsCloned.headers = { "Content-Type": "application/json" }
+  }
+  optionsCloned.credentials = 'include'
+  return fetch(url, optionsCloned)
     .then(checkStatus)
     .then(parseJSON)
-    .then(data => ({ data }))
-    .catch(err => ({ err }));
+    .catch(err => ({ err }))
 }
+
+
+/*
+fetch("/search/project/", {
+  method: "POST",
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded'
+  },
+  body: "q=参数q"
+}).then(function(response) {
+  // do sth
+});*/

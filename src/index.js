@@ -7,7 +7,7 @@ import app from './app'
 
 // 3. Model
 app.model(require('./models/localData').default);
-app.model(require('./models/editor').default);
+app.model(require('./models/server').default);
 
 // 4. Router
 app.router(require('./router').default);

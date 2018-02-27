@@ -17,11 +17,15 @@ export default {
             obj[key] = value
             return Object.assign({}, state, obj)
         },
-        createNote(state) {
-            const itemId = Date.parse(new Date()) / 1000
+        createNote(state, { itemId }) {
             const newState = Object.assign({}, state, { itemId }) //load + copy
             newState.notes.unshift([itemId, itemId, ''])
             return newState
+        },
+        deleteNote(state, { itemId }) {
+            const data = fromJS(state)
+            const index = data.get('notes').findIndex((el) => el.get(1).toString() === itemId.toString())
+            return data.updateIn(['notes'], List(), (el) => el.delete(index) ).toJS()
         },
         modify_note_content(state, { content }) {
             const data = fromJS(state)
@@ -68,6 +72,7 @@ export default {
             }
             return state
         }
+
     },
     effects: {
         * getNotes({ placeholder }, { call, put }) {

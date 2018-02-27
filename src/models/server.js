@@ -1,7 +1,7 @@
-import { note_del, note_touch } from '../services/notes'
+import { _delete, post } from '../services/note'
 
 export default {
-    namespace: 'editor',
+    namespace: 'server',
     state: {
         content: '',
         itemId: '',
@@ -14,15 +14,12 @@ export default {
         },
     },
     effects: {
-        * touchNote({ itemId, content }, { call, put }) {
-            yield call(note_touch, itemId, content)
+        * post({ itemId, content }, { call, put }) {
+            yield call( post, itemId, content)
         },
-
-        * deleteNote({ itemId }, { call, put }) {
-            yield call(note_del, itemId)
-            yield put({ type: 'localData/delete' })
-        },
-
+        * delete({ itemId }, { call, put }) {
+            yield call(_delete, itemId)
+        }
     },
     subscriptions: {
         setup({ dispatch, history }) {
