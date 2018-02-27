@@ -5,7 +5,7 @@ const flow = global.flow
 function Note({ noteEntry, currentItemId }){
     const itemId = noteEntry[1]
     const content = noteEntry[2]
-    
+     
     let style = {cursor:'pointer',borderRight: '0.5px solid #ccc'}
     let classStr = ""
     
@@ -18,7 +18,7 @@ function Note({ noteEntry, currentItemId }){
       <div style={style} className={classStr}>
         <div 
           style={{fontSize:'14px',minHeight:'50px',padding:'15px 4px 15px 10px'}} 
-          onClick={()=>flow.actions.clickNote(itemId, content)}
+          onClick={()=> clickNote(itemId, content)}
         >
           <div>{content}</div>
         </div>
