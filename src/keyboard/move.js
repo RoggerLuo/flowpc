@@ -1,7 +1,15 @@
-const rdx = global.rdx
+const flow = global.flow
 export function moveup() {
-    rdx.dispatch({ type: 'localData/loadlast' })
+    flow.dispatch({ type: 'localData/loadlast' })
     const noteDom = document.getElementsByClassName('selectedNote')[0]
+    // debugger
+    // noteDom.nextSibling !== null
+    
+    // if(noteDom.previousSibling !== null){
+    //     noteDom.className = ""
+    //     noteDom.previousSibling = "selectedNote"
+    // }
+
     if (noteDom) {
         const top = noteDom.offsetTop
         const cant_see_the_note = (noteDom.offsetTop <= (noteDom.parentNode.parentNode.scrollTop))
@@ -13,7 +21,7 @@ export function moveup() {
 }
 
 export function movedown() {
-    rdx.dispatch({ type: 'localData/loadnext' })
+    flow.dispatch({ type: 'localData/loadnext' })
     const noteDom = document.getElementsByClassName('selectedNote')[0]
     if (noteDom) {
         const top = noteDom.offsetTop

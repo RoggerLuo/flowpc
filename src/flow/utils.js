@@ -1,6 +1,10 @@
-const rdx = {}
+const utils = {}
+utils.editorFocus = () => {
+    const editor = document.getElementById('editor')
+    editor.focus()
+}
 
-rdx.findCurrentNote = () => {
+utils.findCurrentNote = () => {
     const state = global.app._store.getState()
     const itemId = state.localData.itemId
     let target = false
@@ -13,4 +17,5 @@ rdx.findCurrentNote = () => {
     })
     return target
 }
-global.rdx = rdx
+
+export default utils

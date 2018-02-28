@@ -1,20 +1,7 @@
-import './index.css';
+import flow from './flow'
 import app from './app'
-import './flow'
-// 1. Initialize
+import './keyboard'
+import './index.css'
 
-// 2. Plugins
-// app.use({});
+flow.dispatch = app._store.dispatch
 
-// 3. Model
-app.model(require('./models/localData').default);
-app.model(require('./models/server').default);
-
-// 4. Router
-app.router(require('./router').default);
-
-// 5. Start
-app.start('#root');
-
-const rdx = global.rdx
-rdx.dispatch = global.app._store.dispatch

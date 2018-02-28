@@ -1,9 +1,9 @@
-const rdx = global.rdx
+const flow = global.flow
 
 export function serverSave(){
     console.log('serverSave ...')
-    const note = rdx.findCurrentNote()
-    rdx.dispatch({ type: 'server/post', note })
+    const note = flow.utils.findCurrentNote()
+    flow.dispatch({ type: 'server/post', note })
 }
 
 function debounce(fn, delay) {
@@ -17,8 +17,9 @@ function debounce(fn, delay) {
         }, delay)
     }
 }
+const debounceSave = debounce(serverSave,1000)
 export function onChange(event) {
-    rdx.dispatch({ type: 'localData/modify_note_content', content: event.target.value })
-    debounce(serverSave,300)()
+    flow.dispatch({ type: 'localData/modify_note_content', content: event.target.value })
+    debounceSave()
 }
 

@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'dva'
 import { Input } from 'antd'
-//import { onChange } from './actions'
 const { TextArea } = Input
 const flow = global.flow
 
