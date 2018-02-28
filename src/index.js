@@ -1,7 +1,7 @@
-import flow from './flow'
-import app from './app'
+import './flow'
+import './app'
 import './keyboard'
 import './index.css'
 
-flow.dispatch = app._store.dispatch
+global.flow.dispatch = global.app._store.dispatch
 

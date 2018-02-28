@@ -1,10 +1,9 @@
 import actions from './actions'
 import utils from './utils'
 
-global.flow = {}
-const flow = global.flow
+const flow = {}
 
 flow.actions = actions
 flow.utils = utils
 
-export default flow
+global.flow = flow

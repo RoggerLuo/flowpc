@@ -1,9 +1,7 @@
-const flow = global.flow
-
 export function serverSave(){
     console.log('serverSave ...')
-    const note = flow.utils.findCurrentNote()
-    flow.dispatch({ type: 'server/post', note })
+    const note = global.flow.utils.findCurrentNote()
+    global.flow.dispatch({ type: 'server/post', note })
 }
 
 function debounce(fn, delay) {
@@ -19,7 +17,7 @@ function debounce(fn, delay) {
 }
 const debounceSave = debounce(serverSave,1000)
 export function onChange(event) {
-    flow.dispatch({ type: 'localData/modify_note_content', content: event.target.value })
+    global.flow.dispatch({ type: 'localData/modify_note_content', content: event.target.value })
     debounceSave()
 }
 

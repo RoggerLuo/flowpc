@@ -19,10 +19,9 @@ function Editor({ content }) {
 }
 
 function mapStateToProps(state) {
-    const itemId = state.localData.itemId
-    const note = state.localData.notes.filter(el => el[1] === itemId)[0]
+    const note = state.localData.notes[state.localData.index]
     if(note === undefined){
-      return { content: '' }      
+        return { content: '' }      
     }
     return { content: note[2] }
 }

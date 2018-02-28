@@ -10,7 +10,7 @@ function keyboard(event) {
     catcher.withMeta(68, flow.actions.delete) //ctrl_d
     catcher.withMeta(38, moveup) //press_up
     catcher.withMeta(40, movedown) //press_down
-    catcher.withoutMeta(13, flow.utils.editorFocus)
+    catcher.withMeta(13, flow.utils.editorFocus)
 }
 
 document.body.onkeydown = keyboard
