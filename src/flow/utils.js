@@ -1,7 +1,13 @@
 const utils = {}
+
 utils.editorFocus = () => {
     const editor = document.getElementById('editor')
     editor.focus()
+}
+
+utils.searchFocus = () => {
+    const search = document.getElementById('search-wrapper')
+    search.children[0].focus()
 }
 
 utils.findCurrentNote = () => {
@@ -9,5 +15,17 @@ utils.findCurrentNote = () => {
     const index = state.localData.index
     return state.localData.notes[index]
 }
+utils.debounce = function(fn, delay) {
+    var timer = null
+    return function() {
+        var context = this,
+            args = arguments
+        clearTimeout(timer)
+        timer = setTimeout(function() {
+            fn.apply(context, args)
+        }, delay)
+    }
+}
 
-export default utils
+global.flow = global.flow || {}
+global.flow.utils = utils

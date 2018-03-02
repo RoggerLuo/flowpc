@@ -1,9 +1,6 @@
-import actions from './actions'
-import utils from './utils'
+import './utils'
 
-const flow = {}
-
-flow.actions = actions
-flow.utils = utils
-
-global.flow = flow
+import './search'
+import './note'
+import './notes'
+import './editor'

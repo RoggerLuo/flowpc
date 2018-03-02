@@ -1,21 +1,27 @@
-import React from 'react';
-import { connect } from 'dva';
-import styles from './IndexPage.css';
+import React from 'react'
+import { connect } from 'dva'
+import s from './s.css'
 
 function IndexPage() {
-  return (
-    <div className={styles.normal}>
-      <h1 className={styles.title}>Yay! Welcome to dva!</h1>
-      <div className={styles.welcome} />
-      <ul className={styles.list}>
-        <li>To get started, edit <code>src/index.js</code> and save to reload.</li>
-        <li><a href="https://github.com/dvajs/dva-docs/blob/master/v1/en-us/getting-started.md">Getting Started</a></li>
-      </ul>
-    </div>
-  );
+    const Keywords = global.flow.search.components.Keywords
+    const Notes = global.flow.notes.component
+    const Editor = global.flow.editor.component
+    const SearchBar = global.flow.search.components.SearchBar
+    return (
+      <div style={{height:'100%',display:'flex'}} >
+          
+          <div className={s.scrollbar} style={{height:'100%',width:'32.2%',overflowY:'auto'}}>
+              <Keywords/>
+              <Notes/>
+          </div>
+          
+          <div style={{height:'100%',display:'flex',flex:'1'}}>
+              <Editor/>
+          </div>
+
+          <SearchBar/>
+      </div>
+  )
 }
 
-IndexPage.propTypes = {
-};
-
-export default connect()(IndexPage);
+export default connect()(IndexPage)

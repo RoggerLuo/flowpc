@@ -1,15 +1,12 @@
 const flow = global.flow
 export function moveup() {
+    if(global.flow.notSave){
+        global.flow.editor.serverSave()
+        return
+    }
+
     flow.dispatch({ type: 'localData/loadlast' })
     const noteDom = document.getElementsByClassName('selectedNote')[0]
-    // debugger
-    // noteDom.nextSibling !== null
-    
-    // if(noteDom.previousSibling !== null){
-    //     noteDom.className = ""
-    //     noteDom.previousSibling = "selectedNote"
-    // }
-
     if (noteDom) {
         const top = noteDom.offsetTop
         const cant_see_the_note = (noteDom.offsetTop <= (noteDom.parentNode.parentNode.scrollTop))
@@ -21,6 +18,11 @@ export function moveup() {
 }
 
 export function movedown() {
+    if(global.flow.notSave){
+        global.flow.editor.serverSave()
+        return
+    }
+
     flow.dispatch({ type: 'localData/loadnext' })
     const noteDom = document.getElementsByClassName('selectedNote')[0]
     if (noteDom) {

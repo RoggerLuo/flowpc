@@ -6,12 +6,15 @@ export default {
     state: {
         notes: [],
         index: 0,
-        appKey: '',
-        isLoading: false,
-        showSuccessWord: false,
-        settingModal: false
+        notSave: false
     },
     reducers: {
+        pushNotes(state,{ note }){
+            const newNotes = state.notes.slice(0)
+            newNotes.push(note)
+            newNotes.sort((a,b) => b[5] - a[5])
+            return Object.assign({}, state, {notes: newNotes.slice(0,10)})
+        },
         change(state, { key, value }) {
             let obj = {}
             obj[key] = value
@@ -19,9 +22,9 @@ export default {
         },
         createNote(state) {
             const itemId = Date.parse(new Date()) / 1000
-            const newState = Object.assign({}, state, { index: 0 })
-            newState.notes.unshift([itemId, itemId, ''])
-            return newState
+            const newNotes = state.notes.slice(0)
+            newNotes.unshift([itemId, itemId, ''])
+            return Object.assign({},state,{ index: 0, notes: newNotes })
         },
         deleteCurrentNote(state) {
             const index = state.index
@@ -61,7 +64,7 @@ export default {
             const notes = yield call(notes_get)
             yield put({ type: 'change', key: 'notes', value: notes })
             if (notes.length !== 0) {
-                yield put({ type: 'load', itemId: notes[0][1] })
+                yield put({ type: 'load', index: 0 })
             }
         },
         * delete({ placeholder }, { call, put, select }) {
