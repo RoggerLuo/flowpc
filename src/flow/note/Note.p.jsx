@@ -6,11 +6,7 @@ export function Note({click, content}){
           style={{fontSize:'14px',minHeight:'50px',padding:'15px 4px 15px 10px'}} 
           onClick={click}
         >
-<<<<<<< HEAD
             <div style={{wordWrap: 'break-word'}}>{content}</div>        
-=======
-            <div>{content}</div>        
->>>>>>> 8ea7acdb2cfca869473942b3a3307553b4e9d0ea
         </div>
     )
 }

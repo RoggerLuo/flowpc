@@ -6,8 +6,6 @@ editor.serverSave = serverSave
 editor.component = component
 global.flow = global.flow || {}
 global.flow.editor = editor
-<<<<<<< HEAD
-
 
 function findLineStart(editor,ind){
     // 找到行首的位置
@@ -187,12 +185,3 @@ global.flow.editor.selectRight = () => {
 
 
 
-
-
-
-
-
-
-
-=======
->>>>>>> 8ea7acdb2cfca869473942b3a3307553b4e9d0ea

@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-// import { fromJS, List } from 'immutable'
->>>>>>> 8ea7acdb2cfca869473942b3a3307553b4e9d0ea
 import { notes_get } from '../services/notes'
 
 export default {
@@ -12,19 +8,11 @@ export default {
         notSave: false
     },
     reducers: {
-<<<<<<< HEAD
         sortNotes(state,{ note }){
             const newNotes = state.notes.slice(0)
             // newNotes.push(note)
             newNotes.sort((a,b) => b[5] - a[5])
             return Object.assign({}, state, { notes: newNotes }) //.slice(0,10)
-=======
-        pushNotes(state,{ note }){
-            const newNotes = state.notes.slice(0)
-            newNotes.push(note)
-            newNotes.sort((a,b) => b[5] - a[5])
-            return Object.assign({}, state, {notes: newNotes.slice(0,10)})
->>>>>>> 8ea7acdb2cfca869473942b3a3307553b4e9d0ea
         },
         change(state, { key, value }) {
             let obj = {}
@@ -93,12 +81,7 @@ export default {
                     dispatch({ type: 'getNotes' })
                 }
             })
-        },
+        }
     }
-<<<<<<< HEAD
 }
 
-// import { fromJS, List } from 'immutable'
-=======
-}
->>>>>>> 8ea7acdb2cfca869473942b3a3307553b4e9d0ea
