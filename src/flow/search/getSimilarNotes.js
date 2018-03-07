@@ -2,12 +2,11 @@ function measureSimilarity(cloned_list,wordList,ind){
     const note = cloned_list[ind]//.slice(0)
     const content = note[2]
     wordList.forEach(word => {
+        if(!note[5]){
+            note[5] = 0            
+        } 
         if(content.indexOf(word) !== -1){
-            if(note[5]){
-                note[5] += 1
-            }else{
-                note[5] = 1
-            }
+            note[5] += 1
         }
     })
     if(note[5] && (note[5] > 0)){

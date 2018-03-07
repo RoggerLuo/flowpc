@@ -25,7 +25,10 @@ export default {
             if(text){
                 const rs = yield call(search, text)
                 yield put({ type: 'change', key: 'result', value: rs })
-                global.flow.search.getSimilarNotes()                              
+                yield put({ type: 'localData/refreshNotes'})
+                global.flow.search.getSimilarNotes()
+            }else{
+                yield put({ type: 'localData/reorderNotes'})
             }
         },
     },
