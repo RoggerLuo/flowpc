@@ -17,7 +17,7 @@ export default (event) => {
             if(shiftKey) return            
         }
         if(keyCode === preset_keyCode){
-            cb()
+            cb(event)
             event.preventDefault()
         }
     }

@@ -7,7 +7,7 @@ function Search({ text, visibility, dispatch }) {
     if(!visibility) return null
     return (
         <div style={{backgroundColor:'#a0a0a07d',position:'fixed', top:'0',bottom:'0',left:'0',right:'0'}}>
-            <div id="search-wrapper" style={{width:'50%',marginLeft:'25%',marginTop:'12%'}}>
+            <div id="search-wrapper" style={{width:'50%',marginLeft:'25%',marginTop:'15%'}}>
                 <TextArea 
                     placeholder="Search..." 
                     style={{fontSize:'16px'}}
