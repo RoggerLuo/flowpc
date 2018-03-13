@@ -29,7 +29,10 @@ export default {
                 global.flow.search.getSimilarNotes()
             }else{
                 yield put({ type: 'localData/reorderNotes'})
+                yield put({ type:'change', key:'result', value:[] })
             }
+            yield put({ type:'change', key:'text', value:'' })
+
         },
     },
     subscriptions: {

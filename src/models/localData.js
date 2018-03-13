@@ -5,9 +5,19 @@ export default {
     state: {
         notes: [],
         index: 0,
-        notSave: false
+        notSave: false,
+        timeReverse: false
     },
     reducers: {
+        sortByTime(state){
+            const newNotes = state.notes.slice(0)
+            if(state.timeReverse){
+                newNotes.sort((a,b) =>  b[3] - a[3])
+            }else{
+                newNotes.sort((a,b) =>  a[3] - b[3])                
+            }
+            return Object.assign({}, state, { timeReverse: !state.timeReverse, notes: newNotes }) //.slice(0,10)
+        },
         reorderNotes(state){
             const newNotes = state.notes.slice(0)
             newNotes.sort((a,b) => b[3] - a[3])
@@ -22,7 +32,6 @@ export default {
         },
         sortNotes(state){
             const newNotes = state.notes.slice(0)
-            // newNotes.push(note)
             newNotes.sort((a,b) => b[5] - a[5])
             return Object.assign({}, state, { notes: newNotes }) //.slice(0,10)
         },
@@ -34,7 +43,7 @@ export default {
         createNote(state) {
             const itemId = Date.parse(new Date()) / 1000
             const newNotes = state.notes.slice(0)
-            newNotes.unshift([itemId, itemId, ''])
+            newNotes.unshift([itemId, itemId, '', itemId])
             return Object.assign({},state,{ index: 0, notes: newNotes })
         },
         deleteCurrentNote(state) {
@@ -50,6 +59,8 @@ export default {
             const index = state.index
             const newNotes = state.notes.slice(0)
             newNotes[index][2] = content
+            const itemId = Date.parse(new Date()) / 1000
+            newNotes[index][3] = itemId
             return Object.assign({}, state, {notes: newNotes})
         },
         load(state, { index }) {
@@ -82,8 +93,11 @@ export default {
             const index = yield select(state => state.localData.index)
             const notes = yield select(state => state.localData.notes)
             const itemId = notes[index][1]
-            yield put({type: 'deleteCurrentNote'}) //先获取itemId再删除，以免index搞乱
-            yield put({ type: 'server/delete', itemId}) 
+            const content = notes[index][2].slice(0,20)
+            if(global.confirm(`Confirm delete the note: "${content}"?`)){
+                yield put({type: 'deleteCurrentNote'}) //先获取itemId再删除，以免index搞乱
+                yield put({ type: 'server/delete', itemId}) 
+            }
         }
     },
     subscriptions: {

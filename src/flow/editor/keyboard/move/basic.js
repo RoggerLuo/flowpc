@@ -28,13 +28,10 @@ export const moveDown = (e) => {
     const editor = e.target
     let ind = editor.selectionStart
     const finalIndex = findLineEnd(editor,ind) + 1
-    if(finalIndex >= (editor.value.length-1) ){
-        editor.selectionStart = (editor.value.length-1)
-        editor.selectionEnd = (editor.value.length-1)
+    if(finalIndex >= (editor.value.length) ){
+        editor.selectionStart = (editor.value.length)
+        editor.selectionEnd = (editor.value.length)
     }else{
-        // editor.selectionStart = finalIndex
-        // editor.selectionEnd = finalIndex
-
         const originalValue = editor.value
         editor.blur()
         editor.value = originalValue.substring(0, finalIndex)

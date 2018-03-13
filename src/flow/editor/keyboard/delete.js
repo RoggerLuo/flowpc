@@ -1,4 +1,4 @@
-import { findLineStart, findLineEnd } from './findStart'
+// import { findLineStart, findLineEnd } from './findStart'
 
 export const deleteLeft = (e) => {
     const editor = e.target

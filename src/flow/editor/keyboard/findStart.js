@@ -13,16 +13,15 @@ export function findLineStart(editor,ind){
 }
 
 export function findLineEnd(editor,ind){
-    // 找到行首的位置
     let textLength = (editor.value.length-1)
     // 如果一开始就是 最末端, 不然不会执行while
-    if(ind >= textLength) return textLength
+    if(ind >= editor.value.length) return editor.value.length
     while(ind <= textLength){
         if(editor.value[ind] === '\n'){
             return ind
         }
         ind = ind + 1
         // 如果已经前进到了最末尾
-        if(ind === textLength) return textLength
+        if(ind >= editor.value.length) return editor.value.length
     }
 }

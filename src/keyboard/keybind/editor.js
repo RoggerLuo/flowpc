@@ -2,6 +2,7 @@ import { _, meta, ctrl, shift } from './config'
 const kb = global.flow.editor.keyboard
 export default function(catcher) { 
     /* editor操作 */
+    
     // 上下左右
     catcher(_.i, {meta}, kb.moveUp) 
     catcher(_.k, {meta}, kb.moveDown) 
@@ -16,10 +17,17 @@ export default function(catcher) {
     //删除文字
     catcher(_.j, {ctrl}, kb.deleteLeft) 
     catcher(_.o, {ctrl}, kb.deleteRight) 
+
     //选中
-    catcher(_.k, {meta,shift}, kb.selectLeft)
+    catcher(_.j, {meta,shift}, kb.selectLeft)
     catcher(_.o, {meta,shift}, kb.selectRight)
     catcher(_.a, {meta}, kb.wholeLine)
+    
     //tab
     catcher(_.tab, {}, kb.tab) 
+    //blur
+    catcher(_.esc,{},kb.blur)
+    //dot
+    catcher(_.h, {meta}, kb.comma) 
+
 }

@@ -5,7 +5,6 @@ function keyboard(event) {
     const catcher = eventCatcher(event)
     notelist(catcher)
     panel(catcher)
-
 }
 
 document.body.onkeydown = keyboard

@@ -11,8 +11,9 @@ export function moveup() {
         const top = noteDom.offsetTop
         const cant_see_the_note = (noteDom.offsetTop <= (noteDom.parentNode.parentNode.scrollTop))
         if (cant_see_the_note) {
+            console.log(top)
             // scrollTo是滑块，数值越大，向下滚得越多
-            noteDom.parentNode.parentNode.scrollTo(0, top)
+            noteDom.parentNode.parentNode.scrollTo(0, top-40) //因为header所以有些变化
         }
     }
 }

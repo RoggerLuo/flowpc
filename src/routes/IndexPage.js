@@ -9,12 +9,12 @@ function IndexPage() {
     const SearchBar = global.flow.search.components.SearchBar
     const Header = global.flow.header.component
     return (
-      <div style={{height:'100%'}}>
-        <div style={{height:'7%',width:'100%'}}>
+      <div style={{height:'100%',display:'flex',flexDirection:'column'}}>
+        <div style={{height:'40px',width:'100%'}}>
             <Header/>
         </div>
 
-        <div style={{height:'93%',display:'flex'}} >
+        <div style={{flex:'1',display:'flex'}} >
             <div className={s.scrollbar} style={{height:'100%',width:'32.2%',overflowY:'auto'}}>
                 <Keywords/>
                 <Notes/>

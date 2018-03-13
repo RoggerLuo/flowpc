@@ -26,7 +26,7 @@ export const ultraUp = (e) => {
 
 export const ultraDown = (e) => {
     const editor = e.target
-    editor.selectionStart = editor.value.length-1
-    editor.selectionEnd = editor.value.length-1
+    editor.selectionStart = editor.value.length
+    editor.selectionEnd = editor.value.length
     editor.scrollTo(0,editor.scrollHeight - editor.offsetHeight)
 }

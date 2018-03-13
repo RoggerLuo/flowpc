@@ -6,20 +6,29 @@ export function Note({click, content}){
           style={{fontSize:'14px',minHeight:'50px',padding:'15px 4px 15px 10px'}} 
           onClick={click}
         >
-            <div style={{wordWrap: 'break-word'}}>{content}</div>        
+            <div 
+                style={{wordWrap: 'break-word'}}
+                dangerouslySetInnerHTML={{__html: content.replace(/\n/g, "<br />")}}
+            >
+            </div>        
+
         </div>
     )
 }
+//                {content}
 
-export function NoteWrapper({ selected, children }){
+
+export function NoteWrapper({ selected, children, over2months }){
     let style = {cursor:'pointer',borderRight: '0.5px solid #ccc'}
     let _class = ""
     
     if(selected){
-        style = Object.assign({}, style, {backgroundColor: '#e2e2e2' })
+        style = Object.assign({}, style, { backgroundColor: '#e2e2e2' })
         _class = "selectedNote"
     }
-    
+    if(over2months){
+        style = Object.assign({}, style, { color: 'orange' })
+    }
     return (
       <div style={style} className={_class}>
           {children}

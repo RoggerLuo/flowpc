@@ -1,7 +1,7 @@
 const option = {
-  key : "Ctrl+Command+J",
+  key : "Ctrl+Command+L",
   active : function() {
-    const win = global.nw.Window.get();
+    const win = global.nw.Window.get()
     win.show()
     win.focus()
   },
@@ -13,8 +13,7 @@ const option = {
 
 if(global.nw){
     // Create a shortcut with |option|.
-    const shortcut = new global.nw.Shortcut(option);
-
+    const shortcut = new global.nw.Shortcut(option)
     // Register global desktop shortcut, which can work without focus.
-    global.nw.App.registerGlobalHotKey(shortcut);
+    global.nw.App.registerGlobalHotKey(shortcut)
 }

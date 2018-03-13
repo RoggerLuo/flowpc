@@ -1,17 +1,15 @@
 import React from 'react'
 import { connect } from 'dva'
-import { Input } from 'antd'
-const { TextArea } = Input
 const flow = global.flow
 
 function Editor({ content, notSave }) {
-    let style = {fontSize:'17px',color:'black',border:'none',backgroundColor:'white'}
+    let style = {width:'100%',padding:'10px',fontSize:'17px',color:'black',border:'none',backgroundColor:'white',outline:'none'}
     if(notSave){
         style = Object.assign({},style,{ backgroundColor:'#f1f6ff' })
     }
     return (
         <div style={{height:'100%',width:'100%',display:'flex'}}>
-            <TextArea 
+            <textarea 
                 style={style} 
                 rows={4} 
                 placeholder="put text..." 

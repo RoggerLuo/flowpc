@@ -19,6 +19,7 @@ export default (event) => {
         if(keyCode === preset_keyCode){
             cb(event)
             event.preventDefault()
+            event.stopPropagation()
         }
     }
 }

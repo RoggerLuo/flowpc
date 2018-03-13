@@ -1,7 +1,13 @@
-import { _, meta } from './config' //ctrl, shift
+import { _, meta,ctrl } from './config' // shift
 export default function(catcher) { 
+    // ordering
+    catcher(_.t,{ctrl},()=>{
+        global.flow.dispatch({ type: 'localData/sortByTime' })
+    })
+
     // 搜索框
     catcher(_.f, {meta}, global.flow.search.toggle) 
+    
     // nw 隐藏界面
     catcher(_.w, {meta}, function(){
         if(global.nw){
@@ -9,6 +15,7 @@ export default function(catcher) {
             win.hide()                    
         }
     })
+    
     // 搜索、编辑器获得焦点
     catcher(_.enter,{meta}, function(){
         if(global.app._store.getState().search.visibility){

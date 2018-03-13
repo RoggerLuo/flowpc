@@ -3,7 +3,7 @@ export function serverSave(){
     global.flow.dispatch({ type: 'server/post', note })
 }
 
-const debounceSave = global.flow.utils.debounce(serverSave,2000)
+const debounceSave = global.flow.utils.debounce(serverSave,15000)
 
 export function onChange(event) {
     global.flow.notSave = true

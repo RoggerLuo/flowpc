@@ -1,7 +1,5 @@
 export const _delete = () => {
-    if(global.confirm('Confirm delete?')){
-        global.flow.dispatch({type: 'localData/delete'})        
-    }
+    global.flow.dispatch({type: 'localData/delete'})        
 }
 
 export const create = () => {
