@@ -22,6 +22,8 @@ export default function(catcher) {
     catcher(_.j, {meta,shift}, kb.selectLeft)
     catcher(_.o, {meta,shift}, kb.selectRight)
     catcher(_.a, {meta}, kb.wholeLine)
+    catcher(_.i, {meta,shift}, kb.selectUp)
+    catcher(_.k, {meta,shift}, kb.selectDown)
     
     //tab
     catcher(_.tab, {}, kb.tab) 

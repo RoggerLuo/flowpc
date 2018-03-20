@@ -5,6 +5,7 @@ export const _delete = () => {
 export const create = () => {
     if(global.flow.notSave){
         global.flow.editor.serverSave()
+        return 
     }
     global.flow.dispatch({ type: 'localData/createNote' })
     global.flow.utils.editorFocus()

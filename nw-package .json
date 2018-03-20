@@ -1,0 +1,16 @@
+{
+  "name": "Flow4.0",
+  "version": "0.0.1",
+  "main": "index.html",
+  "window": {
+    "frame": false,
+    "toolbar": false,
+    "width": 1300,
+    "height": 750
+  },
+  "webkit": {
+
+    "plugin": true
+
+  }
+}

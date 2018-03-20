@@ -2,6 +2,12 @@ import { _, meta,ctrl } from './config' // shift
 export default function(catcher) { 
     // ordering
     catcher(_.t,{ctrl},()=>{
+
+        if(global.flow.notSave){
+            global.flow.editor.serverSave()
+            return
+        }
+
         global.flow.dispatch({ type: 'localData/sortByTime' })
     })
 
