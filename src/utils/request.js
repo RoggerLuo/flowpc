@@ -1,3 +1,4 @@
+import { message } from 'antd'
 import fetch from 'dva/fetch';
 
 function parseJSON(response) {
@@ -21,21 +22,28 @@ function checkStatus(response) {
  * @param  {object} [options] The options we want to pass to "fetch"
  * @return {object}           An object containing either "data" or "err"
  */
-export default function request(url, options) {
 
+
+
+export default function request(url, options) {
   const optionsCloned = Object.assign({},options)
   if (options.method === "POST") {
       const postdata = new FormData()
-      postdata.append("content", options.body.content)
+      for(let k in options.body){
+          if(options.body.hasOwnProperty(k)){
+              postdata.append(k, options.body[k])            
+          }
+      }
       optionsCloned.body = postdata
-      // optionsCloned.body = JSON.stringify(options.body)
-      // optionsCloned.headers = { "Content-Type": "application/json" }
   }
   optionsCloned.credentials = 'include'
   return fetch(url, optionsCloned)
     .then(checkStatus)
     .then(parseJSON)
-    .catch(err => ({ err }))
+    .catch(err => {
+        message.error(`访问${url}的时候`)
+        message.error(`网络错误${err}`)
+    })
 }
 
 
