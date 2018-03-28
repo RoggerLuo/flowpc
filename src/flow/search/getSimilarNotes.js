@@ -3,6 +3,7 @@ function markRed(str,keyword){
     const newstr = str.replace(reg, "<font color='#00a9ff'>$1</font>")
     return newstr
 }
+
 function measureSimilarity(cloned_list,wordList,ind){
     const note = cloned_list[ind]//.slice(0)
     const content = note[2]

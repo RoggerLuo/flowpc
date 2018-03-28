@@ -21,6 +21,7 @@ export default {
         reorderNotes(state){
             const newNotes = state.notes.slice(0)
             newNotes.sort((a,b) => b[3] - a[3])
+            newNotes.forEach(note=>{note[6] = note[2]})
             return Object.assign({}, state, { notes: newNotes }) //.slice(0,10)
         },
         refreshNotes(state){
