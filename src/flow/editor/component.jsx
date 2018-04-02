@@ -1,9 +1,19 @@
 import React from 'react'
 import { connect } from 'dva'
-const flow = global.flow
+import img from './bg.png'
 
+const flow = global.flow
 function Editor({ content, notSave }) {
-    let style = {width:'100%',padding:'10px',fontSize:'17px',color:'black',border:'none',backgroundColor:'white',outline:'none'}
+    let style = { 
+        width:'100%',
+        padding:'10px',
+        fontSize:'19px',
+        color:'black',
+        border:'none',
+        backgroundColor:'white',
+        outline:'none',
+        backgroundImage:`url(${img})`
+    }
     if(notSave){
         style = Object.assign({},style,{ backgroundColor:'#f1f6ff' })
     }
