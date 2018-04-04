@@ -11,11 +11,10 @@ function Editor({ content, notSave }) {
         color:'black',
         border:'none',
         backgroundColor:'white',
-        outline:'none',
-        backgroundImage:`url(${img})`
+        outline:'none'
     }
     if(notSave){
-        style = Object.assign({},style,{ backgroundColor:'#f1f6ff' })
+        style = Object.assign({},style,{ backgroundImage:`url(${img})` })
     }
     return (
         <div style={{height:'100%',width:'100%',display:'flex'}}>
