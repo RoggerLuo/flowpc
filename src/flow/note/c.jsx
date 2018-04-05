@@ -1,5 +1,5 @@
 import React from 'react'
-import { Note, NoteWrapper } from './Note.p'
+import { Note, NoteWrapper } from './p'
 
 function NoteContainer({ entry, index, _index, dispatch }){
     const content = entry[6] || entry[2]
@@ -9,7 +9,7 @@ function NoteContainer({ entry, index, _index, dispatch }){
             global.flow.editor.serverSave()
             return
         }
-        dispatch({ type: 'localData/load', index }) //itemId, content 
+        dispatch({ type: 'localData/point', index }) //itemId, content 
     }
     const modify_time = entry[3]
     const over2months = modify_time < (Date.parse(new Date())/1000 - 2*30*24*60*60)

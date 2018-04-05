@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'dva'
 import img from './bg.png'
-import s from './s.css'
 
 const flow = global.flow
 function Editor({ content, notSave }) {
@@ -18,7 +17,7 @@ function Editor({ content, notSave }) {
         style = Object.assign({},style,{ backgroundImage:`url(${img})` })
     }
     return (
-        <div style={{height:'100%',width:'100%',minWidth:'238px',display:'flex',borderRight: '1px solid #ccc'}}>
+        <div style={{height:'100%',width:'100%',minWidth:'238px',display:'flex'}}>
             <textarea 
                 style={style} 
                 rows={4} 
@@ -26,7 +25,6 @@ function Editor({ content, notSave }) {
                 value={content}
                 onChange={flow.editor.onChange}
                 id="editor"
-                className={s.scrollbar}
             />
         </div>
     )

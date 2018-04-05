@@ -6,19 +6,8 @@ const isArray = (item) => item instanceof Array
 
 function GroupsContainer({ result }) {
     if(!isArray(result)) throw result
-    if(result.length === 0) return null
-
-    const groups = []
-    result.forEach(words => {
-        words.forEach((el,ind) => {
-            if(!groups[ind]){
-                groups[ind] = []
-            } 
-            groups[ind].push(el.word)
-        })
-    })
-         
-    return (<Words groups={groups} />)
+    if(result.length === 0) return null         
+    return (<Words groups={result} />)
 }
 
 function mapStateToProps(state) {

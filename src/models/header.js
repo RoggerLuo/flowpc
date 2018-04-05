@@ -1,9 +1,9 @@
 import { get, post } from '../services/header'
-
 export default {
     namespace: 'header',
     state: {
         text: '',
+        advance: false
     },
     reducers: {
         change(state, { key, value }) {
@@ -11,6 +11,9 @@ export default {
             obj[key] = value
             return Object.assign({}, state, obj)
         },
+        modeChange(state){
+            return Object.assign({}, state, { advance: !state.advance } )
+        }
     },
     effects: {
         * postText({ text }, { call, put }) {
@@ -25,7 +28,7 @@ export default {
         setup({ dispatch, history }) {
             history.listen(({ pathname, query }) => {
                 if (pathname === '/') {
-                    dispatch({ type: 'getText' })
+                    // dispatch({ type: 'getText' })
                 }
             })
         }

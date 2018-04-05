@@ -6,7 +6,6 @@ export default {
         visibility: false,
         text: '',
         result: [],
-        notes: []
     },
     reducers: {
         change(state, { key, value }) {
@@ -17,22 +16,48 @@ export default {
         toggle(state) {
             const visibility = state.visibility
             return Object.assign({}, state, { visibility: !visibility })
-        }
+        },
     },
     effects: {
+        * handleSearch({ rs }, { call, put, select }) {            
+            yield put({ type: 'change', key:'result', value: remixGroups(rs) })
+            yield put({ type: 'countClear' })
+            yield put({ type: 'localData/change', key:'index', value: 0 })
+            const notes = yield select(state => state.localData.notes)
+            global.flow.search.getSimilarNotes(notes,flatWordGroupToList(rs))
+        },
         * request({ placeholder }, { call, put, select }) {
             const text = yield select(state => state.search.text)
             if(text){
                 const rs = yield call(search, text)
-                yield put({ type: 'change', key: 'result', value: rs })
-                yield put({ type: 'localData/refreshNotes'})
-                global.flow.search.getSimilarNotes()
+                yield put({ type: 'handleSearch', rs }) 
             }else{
-                yield put({ type: 'localData/reorderNotes'})
-                yield put({ type:'change', key:'result', value:[] })
+                yield put({ type: 'reborn'})
             }
             yield put({ type:'change', key:'text', value:'' })
-
+        },
+        * reborn({ placeholder }, { call, put, select }) {                
+            // localData
+            const _notes = yield select(state => state.localData.notes)
+            const notes = _notes.slice(0)
+            notes.sort((a,b) => b[3] - a[3])
+            notes.forEach(note => {
+                note[5] = 0 //还原计数
+                note[6] = note[2] //还原文字
+            })
+            yield put({ type: 'localData/change', key:'notes', value:notes })
+            yield put({ type: 'localData/change', key:'index', value: 0 })
+            // 本model
+            yield put({ type:'change', key:'result', value:[] })
+        },
+        * countClear({ placeholder }, { call, put, select }) {                
+            const _notes = yield select(state => state.localData.notes)
+            const notes = _notes.slice(0)
+            notes.forEach(note => {
+                note[5] = 0 //还原计数
+                note[6] = note[2] //还原文字
+            })
+            yield put({ type: 'localData/change', key:'notes', value: notes })
         },
     },
     subscriptions: {
@@ -43,4 +68,26 @@ export default {
             })
         }
     }
+}
+
+function flatWordGroupToList(rs){
+    const wordList = []
+    rs.forEach(el => {
+        el.forEach(wordEntry => {
+            wordList.push(wordEntry.word)
+        })
+    })
+    return wordList
+}
+function remixGroups(rs){
+    const groups = []
+    rs.forEach(words => {
+        words.forEach((el,ind) => {
+            if(!groups[ind]){
+                groups[ind] = []
+            } 
+            groups[ind].push(el.word)
+        })
+    })
+    return groups
 }

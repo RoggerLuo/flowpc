@@ -1,0 +1,36 @@
+
+.scrollbar::-webkit-scrollbar {
+  width: 2px;
+  background: #ff2727;
+}
+.scrollbar::-moz-scrollbar {
+  width: 2px;
+  background: #ff2727;
+}
+.scrollbar::-ms-scrollbar {
+  width: 2px;
+  background: #ff2727;
+}
+.scrollbar::-o-scrollbar {
+  width: 2px;
+  background: #ff2727;
+}
+.scrollbar::scrollbar {
+  width: 2px;
+  background: #ff2727;
+}
+.scrollbar::-webkit-scrollbar-thumb {
+  background: white;
+}
+.scrollbar::-moz-scrollbar-thumb {
+  background: white;
+}
+.scrollbar::-ms-scrollbar-thumb {
+  background: white;
+}
+.scrollbar::-o-scrollbar-thumb {
+  background: white;
+}
+.scrollbar::scrollbar-thumb {
+  background: white;
+}

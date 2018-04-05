@@ -1,35 +1,18 @@
-import { notes_get } from '../services/notes'
+import { get } from '../services/notes'
 
 export default {
     namespace: 'localData',
     state: {
         notes: [],
         index: 0,
+        index2: 0,
+        index2Locked:false,
         notSave: false,
         timeReverse: false
     },
     reducers: {
-        sortByTime(state){
-            const newNotes = state.notes.slice(0)
-            if(state.timeReverse){
-                newNotes.sort((a,b) =>  b[3] - a[3])
-            }else{
-                newNotes.sort((a,b) =>  a[3] - b[3])                
-            }
-            return Object.assign({}, state, { timeReverse: !state.timeReverse, notes: newNotes }) //.slice(0,10)
-        },
-        reorderNotes(state){
-            const newNotes = state.notes.slice(0)
-            newNotes.sort((a,b) => b[3] - a[3])
-            newNotes.forEach(note=>{note[6] = note[2]})
-            return Object.assign({}, state, { notes: newNotes }) //.slice(0,10)
-        },
-        refreshNotes(state){
-            const newNotes = state.notes.slice(0)
-            newNotes.forEach(note => {
-                note[5] = 0
-            })
-            return Object.assign({}, state, { notes: newNotes }) //.slice(0,10)
+        tihuChange(state){
+            return Object.assign({}, state, { index2Locked: !state.index2Locked }) //.slice(0,10)
         },
         sortNotes(state){
             const newNotes = state.notes.slice(0)
@@ -58,13 +41,18 @@ export default {
         },
         modify_note_content(state, { content }) {
             const index = state.index
-            const newNotes = state.notes.slice(0)
-            newNotes[index][2] = content
+            const notes = state.notes.slice(0)
+            notes[index][2] = content
             const itemId = Date.parse(new Date()) / 1000
-            newNotes[index][3] = itemId
-            return Object.assign({}, state, {notes: newNotes})
+            notes[index][3] = itemId
+            notes[index][6] = content //每次编辑就把 高亮效果取消，编程实时编辑效果
+            return Object.assign({}, state, { notes })
         },
-        load(state, { index }) {
+        point(state, { index }) {
+            if(!state.index2Locked){
+                const notes = state.notes.slice(0)
+                return Object.assign({}, state, { index, index2: notes[index] })                
+            }
             return Object.assign({}, state, { index })
         },
         loadlast(state) {
@@ -81,10 +69,20 @@ export default {
             }
             return state
         },
+        // sortByTime(state){
+        //     const notes = state.notes.slice(0)
+        //     if(state.timeReverse){
+        //         notes.sort((a,b) =>  b[3] - a[3])
+        //     }else{
+        //         notes.sort((a,b) =>  a[3] - b[3])                
+        //     }
+        //     return Object.assign({}, state, { index: 0, timeReverse: !state.timeReverse, notes }) //.slice(0,10)
+        // },
+
     },
     effects: {
         * getNotes({ placeholder }, { call, put }) {
-            const notes = yield call(notes_get)
+            const notes = yield call(get)
             yield put({ type: 'change', key: 'notes', value: notes })
             if (notes.length !== 0) {
                 yield put({ type: 'load', index: 0 })
@@ -111,4 +109,3 @@ export default {
         }
     }
 }
-
