@@ -19,7 +19,7 @@ export default {
         },
     },
     effects: {
-        * handleSearch({ rs }, { call, put, select }) {            
+        * handleSearch({ rs }, { call, put, select }) {
             yield put({ type: 'change', key:'result', value: remixGroups(rs) })
             yield put({ type: 'countClear' })
             yield put({ type: 'localData/change', key:'index', value: 0 })
@@ -74,19 +74,25 @@ function flatWordGroupToList(rs){
     const wordList = []
     rs.forEach(el => {
         el.forEach(wordEntry => {
-            wordList.push(wordEntry.word)
+            if(wordList.indexOf(wordEntry.word) === -1){
+                wordList.push(wordEntry.word)    
+            }
         })
     })
     return wordList
 }
 function remixGroups(rs){
+    const wordList = []
     const groups = []
     rs.forEach(words => {
         words.forEach((el,ind) => {
             if(!groups[ind]){
                 groups[ind] = []
             } 
-            groups[ind].push(el.word)
+            if(wordList.indexOf(el.word) === -1){
+                groups[ind].push(el.word)
+                wordList.push(el.word)    
+            }
         })
     })
     return groups

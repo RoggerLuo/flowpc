@@ -7,7 +7,7 @@ import { connect } from 'dva'
 
 function Header({ content, notSave, index2Locked, advance }) {
 
-    const click = () => global.flow.dispatch({type:'localData/sortByTime'})
+    // const click = () => global.flow.dispatch({type:'localData/sortByTime'})
     const clickIronMan = () => {
         global.flow.dispatch({ type: 'header/modeChange' })
     }

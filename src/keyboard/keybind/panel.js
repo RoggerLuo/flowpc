@@ -1,4 +1,4 @@
-import { _, meta,ctrl } from './config' // shift
+import { _, meta } from './config' // shift ,ctrl
 export default function(catcher) { 
     // ordering
     // catcher(_.t,{ctrl},()=>{
