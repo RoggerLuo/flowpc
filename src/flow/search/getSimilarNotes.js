@@ -35,7 +35,7 @@ export default getSimilarNotes
 function markRedStep1(str,keyword){
     try {
         const reg = new RegExp("(" + keyword + ")", "g")
-        const newstr = str.replace(reg, " _-_-$1-_-_ ") //"<font color='#00a9ff'>$1</font>"
+        const newstr = str.replace(reg, " _-_-$1-_-_ ") 
         return newstr
     }
     catch(err){
@@ -45,10 +45,10 @@ function markRedStep1(str,keyword){
 
 function markRedStep2(str){
     while(/\s_-_-/g.test(str)){
-        str = str.replace(/\s_-_-/g, `<span style='color:#00a9ff'>`)            
+        str = str.replace(/\s_-_-/g, '`') //<span style='color:#00a9ff'>
     }
     while(/-_-_\s/g.test(str)){
-        str = str.replace(/-_-_\s/g, `</span>`) 
+        str = str.replace(/-_-_\s/g, '`') //`</span>` 
     }
     return str
 }

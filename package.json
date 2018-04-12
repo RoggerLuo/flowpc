@@ -11,6 +11,7 @@
     "babel-plugin-import": "^1.6.5",
     "dva": "^2.1.0",
     "immutable": "^3.8.2",
+    "markdown-react-js": "^1.0.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   },

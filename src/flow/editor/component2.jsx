@@ -1,9 +1,9 @@
 import React from 'react'
 import { connect } from 'dva'
-import s from './s.css'
+import MDReactComponent from 'markdown-react-js'
 
-// const flow = global.flow
 function Editor({ content }) {
+    content = content || ''
     let style = { 
         width:'100%',
         padding:'10px',
@@ -15,14 +15,9 @@ function Editor({ content }) {
     }
     return (
         <div style={{height:'100%',width:'100%',minWidth:'238px',display:'flex'}}>
-            <textarea 
-                style={style} 
-                rows={4} 
-                placeholder="put text..." 
-                value={content}
-                id="editor"
-                className={s.scrollbar}
-            />
+            <div style={style}>
+                <MDReactComponent text={content} />
+            </div>
         </div>
     )
 }
@@ -33,3 +28,7 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps)(Editor)
+
+/*
+import MDReactComponent from 'markdown-react-js'
+*/

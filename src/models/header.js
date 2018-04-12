@@ -3,7 +3,8 @@ export default {
     namespace: 'header',
     state: {
         text: '',
-        advance: false
+        advance: false,
+        hideNotes: false
     },
     reducers: {
         change(state, { key, value }) {
@@ -13,6 +14,11 @@ export default {
         },
         modeChange(state){
             return Object.assign({}, state, { advance: !state.advance } )
+        },
+        hsqChange(state){
+            const { ...newstate } = state
+            newstate.hideNotes = !state.hideNotes
+            return newstate //Object.assign({}, state, { hideNotes: !state.hideNotes } )
         }
     },
     effects: {

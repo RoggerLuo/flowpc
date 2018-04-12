@@ -5,7 +5,7 @@ function Notes({ notes, index, dispatch }) {
     const Note = global.flow.note
     return (
         <div style={{width:'100%'}}>
-            {notes.map((entry,ind) => <Note entry={entry} index={ind} _index={index} dispatch={dispatch} key={ind}/>)}
+            { notes.slice(0,10).map((entry,ind) => <Note entry={entry} index={ind} _index={index} dispatch={dispatch} key={ind}/>) }
         </div>
     )
 }

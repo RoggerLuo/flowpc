@@ -1,29 +1,23 @@
 import React from 'react'
+import MDReactComponent from 'markdown-react-js'
 
 export function Note({click, content}){
     return (
         <div 
-          style={{fontSize:'14px',minHeight:'50px',padding:'15px 4px 15px 10px'}} 
+          style={{fontSize:'17px',lineHeight:'1.5',minHeight:'50px',padding:'15px 10px 15px 10px'}} 
           onClick={click}
         >
-            <div 
-                style={{wordWrap: 'break-word'}}
-                dangerouslySetInnerHTML={{__html: content.replace(/\n/g, "<br />")}}
-            >
-            </div>        
-
+            <MDReactComponent text={content} /> 
         </div>
     )
 }
-//                {content}
-
 
 export function NoteWrapper({ selected, children, over2months }){
-    let style = {cursor:'pointer',borderRight: '0.5px solid #ccc'}
+    let style = { cursor:'pointer', borderRight: '0.5px solid #ccc' }
     let _class = ""
     
     if(selected){
-        style = Object.assign({}, style, { backgroundColor: '#e2e2e2' })
+        style = { borderRight: '0.5px solid #ccc', backgroundColor: '#ececec' } 
         _class = "selectedNote"
     }
     if(over2months){
@@ -38,4 +32,13 @@ export function NoteWrapper({ selected, children, over2months }){
 }
 
 export default Note
+
+/*
+<div 
+    style={{wordWrap: 'break-word'}}
+    dangerouslySetInnerHTML={{__html: content.replace(/\n/g, "<br />") }}
+>
+</div>        
+
+*/
 
