@@ -73,14 +73,15 @@ export default {
 function flatWordGroupToList(rs){
     const wordList = []
     rs.forEach(el => {
-        el.forEach(wordEntry => {
+        el.forEach((wordEntry,ind) => {
             if(wordList.indexOf(wordEntry.word) === -1){
-                wordList.push(wordEntry.word)    
+                wordList.push({ word: wordEntry.word, weight: Math.pow((16-ind),3) })    
             }
         })
     })
     return wordList
 }
+
 function remixGroups(rs){
     const wordList = []
     const groups = []

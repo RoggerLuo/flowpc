@@ -1,12 +1,12 @@
 
 function measureSimilarity(notes,wordList,ind){
     const note = notes[ind] 
-    const content = note[2]
+    const note_word_list = JSON.parse(note[3])
     if(!note[6]) note[6] = note[2]
-    wordList.forEach(word => {
-        if(content.indexOf(word) !== -1){
-            note[5] += 1
-            note[6] = markRedStep1(note[6],word)
+    wordList.forEach(entry => {
+        if(note_word_list.indexOf(entry.word) !== -1){
+            note[5] += entry.weight
+            note[6] = markRedStep1(note[6],entry.word)
         }
     })
     if(note[5] && (note[5] > 0)){
