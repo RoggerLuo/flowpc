@@ -103,7 +103,11 @@ export default {
         setup({ dispatch, history }) {
             history.listen(({ pathname, query }) => {
                 if (pathname === '/') {
-                    dispatch({ type: 'getNotes' })
+
+
+                    // dispatch({ type: 'getNotes' })
+
+                    
                 }
             })
         }
