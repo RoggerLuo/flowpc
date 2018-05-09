@@ -25,25 +25,27 @@ function checkStatus(response) {
 
 
 
-export default function request(url, options) {
-  const optionsCloned = Object.assign({},options)
-  if (options.method === "POST") {
-      const postdata = new FormData()
-      for(let k in options.body){
-          if(options.body.hasOwnProperty(k)){
-              postdata.append(k, options.body[k])            
-          }
-      }
-      optionsCloned.body = postdata
+export default function request(url, {...options}) {
+  if (options.method === "POST") {      
+      options.body = transformBody(body)
   }
-  optionsCloned.credentials = 'include'
-  return fetch(url, optionsCloned)
+  options.credentials = 'include'
+  return fetch(url, options)
     .then(checkStatus)
     .then(parseJSON)
     .catch(err => {
-        message.error(`访问${url}的时候`)
+        message.error(`在请求${url}的时候`)
         message.error(`网络错误${err}`)
     })
+  function transformBody(body){
+      const postdata = new FormData()
+      for(let k in body){
+          if(body.hasOwnProperty(k)){
+              postdata.append(k, body[k])            
+          }
+      }
+      return postdata
+  }
 }
 
 
