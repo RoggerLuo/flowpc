@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'dva'
 import { Editor, EditorState, ContentState } from 'draft-js'
 import decorator from './decorator'
+import { myKeyBindingFn, handleKeyCommand } from './keyCommand'
 
 /*
 
@@ -20,6 +21,8 @@ const cs = ContentState.createFromText('#text\n##asdfasd\n###asdfasdf')
 class MyEditor extends React.Component {
     constructor(props) {
         super(props) 
+        this.handleKeyCommand = handleKeyCommand.bind(this)
+
         // const contentState = ContentState.createFromText(props.text)
         this.state = { editorState: EditorState.createEmpty(decorator) }
     }
@@ -33,28 +36,36 @@ class MyEditor extends React.Component {
         })
     }
     render(){
-        return <Editor editorState={this.props.editorState} onChange={this.onChange.bind(this)}/>
+        return (<div>
+            <Editor 
+                editorState={this.state.editorState} 
+                onChange={this.onChange.bind(this)}
+                handleKeyCommand={this.handleKeyCommand}
+                keyBindingFn={myKeyBindingFn}
+            />
+        </div>)
     }
 }
+export default (MyEditor)
 
-function mapStateToProps(state) {
-    const data = state.localData
-    const note = data.notes[data.index]
-    const contenState = ContentState.createFromText(note[2])
-    const editorState = EditorState.createWithContent(contentState,decorator)
+// function mapStateToProps(state) {
+//     const data = state.localData
+//     const note = data.notes[data.index]
+//     const contenState = ContentState.createFromText(note[2])
+//     const editorState = EditorState.createWithContent(contentState,decorator)
 
-    return { editorState }
-}
-function mapDispatchToProps(dispatch) {
-    (editorState) => {
-        const contentState = editorState.getCurrentContent()
-        const content = contentState.getPlainText()
-        dispatch({type:'localData/modify_note_content',content})        
-    }
-    return
+//     return { editorState }
+// }
+// function mapDispatchToProps(dispatch) {
+//     (editorState) => {
+//         const contentState = editorState.getCurrentContent()
+//         const content = contentState.getPlainText()
+//         dispatch({type:'localData/modify_note_content',content})        
+//     }
+//     return
 
-}
-export default connect(mapStateToProps,mapDispatchToProps)(MyEditor)
+// }
+// export default connect(mapStateToProps,mapDispatchToProps)(MyEditor)
 
 
 

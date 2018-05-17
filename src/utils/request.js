@@ -27,7 +27,7 @@ function checkStatus(response) {
 
 export default function request(url, {...options}) {
   if (options.method === "POST") {      
-      options.body = transformBody(body)
+      options.body = transformBody(options.body)
   }
   options.credentials = 'include'
   return fetch(url, options)
