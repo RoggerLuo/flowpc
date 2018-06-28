@@ -1,12 +1,19 @@
+:global(.highlight-font-color){
+    color:#1a98ff;
+}
+:global(h4,h3,h2) {
+    font-weight: 400;
+}
 html, body, :global(#root) {
   height: 100%;
   margin: 0px;
-  font-family:"Microsoft YaHei";
+  font-family: PingFangSC;
+  word-break: break-all;
+  color: #333333;
 }
 :global(pre){
     background-color: white;
     border-radius: 5px;
-    /*padding: 13px 0px 9px 0px;    */
     padding: 13px 13px 9px 13px;    
     margin-left: 10px;
     margin-right: 10px;

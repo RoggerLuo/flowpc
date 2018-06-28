@@ -1,22 +1,37 @@
-import dva from 'dva'
+import React from 'react'
+import { connect, Model } from 'dva'
+// import Keywords from 'components/Keywords'
+import Notes from 'components/notes'
+// import Editor from 'components/editor'
+// import Editor2 from 'components/editor.component2'
+// import SearchBar from 'components/search.components.SearchBar'
+import AppView from './AppView'
+import model from './model'
+Model.create(model)
+const NotesContainer = connect(state=>state.app)(app=><Notes notes={app.notes} index={app.index}/>)
+class App extends React.Component {
+    constructor(props) {
+        super(props)
+        // this.state = { editorVisible: false }
+        // l.fetchData(notes => l.importDraftjsCore())
+        Model.dispatch({ type:'app/fetchNotes' })
+    }
+    componentDidMount(){
+        // history.fetch()
+    }
+    render(){
+        return (
+            <AppView Keywords={null} Notes={<NotesContainer/>} SearchBar={null}/>
+        )
+    } 
+}
+/*
+<Header/>
+<Editor/>
+<Keywords/>
+<Notes/>
+<SearchBar/>
+*/
 
-// 1. Initialize
-const app = dva()
-
-// 2. Plugins
-// app.use({});
-
-// 3. Model
-app.model(require('./models/localData').default);
-app.model(require('./models/server').default);
-app.model(require('./models/search').default);
-app.model(require('./models/header').default);
-
-// 4. Router
-app.router(require('./router').default);
-
-// 5. Start
-app.start('#root');
-
-global.app = app
+export default connect(state=>state.app)(App)
 
