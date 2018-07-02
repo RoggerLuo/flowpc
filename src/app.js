@@ -1,5 +1,5 @@
 import React from 'react'
-import { connect, Model } from 'dva'
+import { connect, Model, Keyboard } from 'dva'
 // import Keywords from 'components/Keywords'
 import Notes from 'components/notes'
 // import Editor from 'components/editor'
@@ -7,8 +7,10 @@ import Notes from 'components/notes'
 // import SearchBar from 'components/search.components.SearchBar'
 import AppView from './AppView'
 import model from './model'
+import keyboardEvents from './keyboard'
 Model.create(model)
 const NotesContainer = connect(state=>state.app)(app=><Notes notes={app.notes} index={app.index}/>)
+const kb = new Keyboard(document.body)
 class App extends React.Component {
     constructor(props) {
         super(props)
@@ -18,20 +20,16 @@ class App extends React.Component {
     }
     componentDidMount(){
         // history.fetch()
+        kb.keybind(keyboardEvents)
     }
     render(){
         return (
-            <AppView Keywords={null} Notes={<NotesContainer/>} SearchBar={null}/>
+            <AppView 
+                Keywords={null} 
+                Notes={<NotesContainer/>} 
+                SearchBar={null}
+            />
         )
     } 
 }
-/*
-<Header/>
-<Editor/>
-<Keywords/>
-<Notes/>
-<SearchBar/>
-*/
-
 export default connect(state=>state.app)(App)
-

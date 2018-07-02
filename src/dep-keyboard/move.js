@@ -1,12 +1,11 @@
-// const flow = global.flow
-import { Model } from 'dva'
+const flow = global.flow
 export function moveup() {
-    if(Model.get('editor').notSave){
-        Model.dispatch({type:'editor/saveNote'})
+    if(global.flow.notSave){
+        global.flow.editor.serverSave()
         return
     }
 
-    // flow.dispatch({ type: 'localData/loadlast' })
+    flow.dispatch({ type: 'localData/loadlast' })
     const noteDom = document.getElementsByClassName('selectedNote')[0]
     if (noteDom) {
         const top = noteDom.offsetTop
@@ -20,12 +19,12 @@ export function moveup() {
 }
 
 export function movedown() {
-    if(Model.get('editor').notSave){
-        Model.dispatch({type:'editor/saveNote'})
+    if(global.flow.notSave){
+        global.flow.editor.serverSave()
         return
     }
 
-    // flow.dispatch({ type: 'localData/loadnext' })
+    flow.dispatch({ type: 'localData/loadnext' })
     const noteDom = document.getElementsByClassName('selectedNote')[0]
     if (noteDom) {
         const top = noteDom.offsetTop

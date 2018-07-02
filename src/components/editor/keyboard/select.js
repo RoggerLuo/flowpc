@@ -1,16 +1,19 @@
 import { findLineStart, findLineEnd } from './findStart'
 
+let direction = 'left'
+let direction2 = 'up'
+
 export const selectUp = (e) => {
     const editor = e.target
     const startPos = editor.selectionStart
     const EndPos = editor.selectionEnd
-    if(global.flow.editor.keyboard.direction2 === 'down'){
+    if(direction2 === 'down'){
         //end pos往上一行
         const lineStartIndex = findLineStart(editor,EndPos) - 1
         const lineStartIndexOfPrevLine = findLineStart(editor,lineStartIndex)
 
         if(lineStartIndexOfPrevLine<startPos){
-            global.flow.editor.keyboard.direction2 = 'up'
+            direction2 = 'up'
             editor.selectionStart = lineStartIndexOfPrevLine
             editor.selectionEnd = startPos
         }else{
@@ -23,7 +26,7 @@ export const selectUp = (e) => {
         if(startPos===0) return
         const lineStartIndex = findLineStart(editor,startPos) - 1 //如果为0，减去1就变负值了
         const lineStartIndexOfPrevLine = findLineStart(editor,lineStartIndex)
-        console.log(lineStartIndexOfPrevLine)
+        // console.log(lineStartIndexOfPrevLine)
         editor.selectionStart = lineStartIndexOfPrevLine
         editor.selectionEnd = EndPos
     }
@@ -34,7 +37,7 @@ export const selectDown = (e) => {
     const startPos = editor.selectionStart
     const EndPos = editor.selectionEnd
 
-    if(global.flow.editor.keyboard.direction2 === 'down'){
+    if(direction2 === 'down'){
         //end pos往下一行
         if(EndPos === e.target.value.length) return
         const lineEndIndex = findLineEnd(editor,EndPos) + 1
@@ -49,7 +52,7 @@ export const selectDown = (e) => {
 
 
         if(lineEndIndexOfPrevLine2 > EndPos){
-            global.flow.editor.keyboard.direction2 = 'down'
+            direction2 = 'down'
             editor.selectionStart = EndPos
             editor.selectionEnd = lineEndIndexOfPrevLine2
 
@@ -67,10 +70,10 @@ export const selectLeft = (e) => {
     const EndPos = editor.selectionEnd
     //改变方向
     if(startPos === EndPos){ 
-        global.flow.editor.keyboard.direction = 'left'
+        direction = 'left'
     }
 
-    if(global.flow.editor.keyboard.direction === 'right'){
+    if(direction === 'right'){
         const newPos = EndPos - 1
         editor.selectionEnd = newPos
     }else{
@@ -85,10 +88,10 @@ export const selectRight = (e) => {
     const EndPos = editor.selectionEnd
     //改变方向
     if(startPos === EndPos){
-        global.flow.editor.keyboard.direction = 'right'
+        direction = 'right'
     }
 
-    if(global.flow.editor.keyboard.direction === 'left'){
+    if(direction === 'left'){
         const newPos = startPos + 1
         editor.selectionStart = newPos
     }else{

@@ -8,7 +8,7 @@ import invariant from 'invariant'
 import modelMethod from './Model'
 import Fetch from './Fetch'
 import Xss from './plugins/Xss'
-// import Keyboard from './Keyboard'
+import Keyboard from './plugins/Keyboard'
 // import constantMethod from './Constant'
 const app = {
     _store: null,
@@ -30,6 +30,6 @@ const sagaMiddleware = createSagaMiddleware()
 app._store = createStore(a => a, applyMiddleware(sagaMiddleware))
 
 export const Model = modelMethod(app,config,sagaMiddleware)
-export { Fetch, connect, Xss }
+export { Fetch, connect, Xss, Keyboard }
 export default app
 // export const Constant = constantMethod(app)

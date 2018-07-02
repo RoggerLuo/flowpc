@@ -1,14 +1,20 @@
-import { editor, notelist, panel } from './keybind'
-import eventCatcher from './eventCatcher'
+import { Model } from 'dva'
+import {moveup, movedown} from './move'
+// import { _, meta, ctrl } from './config' //shift
+// const flow = global.flow
+export default function({keyMap,meta,ctrl,shift},catcher) { 
+    /* 文章列表操作 */
+    //移动
+    catcher(keyMap.i, {ctrl},  moveup) 
+    catcher(keyMap.k, {ctrl}, movedown) 
 
-function keyboard(event) { 
-    const catcher = eventCatcher(event)
-    notelist(catcher)
-    panel(catcher)
-}
+    catcher(keyMap.i, {meta},  moveup) 
+    catcher(keyMap.k, {meta}, movedown) 
 
-document.body.onkeydown = keyboard
-document.getElementById('editor').onkeydown = function(event){
-    const catcher = eventCatcher(event)
-    editor(catcher)
+    // catcher(keyMap.up, {meta}, moveup) 
+    // catcher(keyMap.down, {meta}, movedown) 
+    //新建 保存 删除
+    catcher(keyMap.n, {ctrl} , ()=>Model.dispatch({type:'editor/create'})) 
+    catcher(keyMap.s, {meta}, ()=>Model.dispatch({type:'editor/saveNote'}))
+    catcher(keyMap.d, {meta}, ()=>Model.dispatch({type:'editor/delete'})) 
 }
