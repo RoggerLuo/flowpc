@@ -13,13 +13,7 @@ export default {
     reducers: {
     },
     effects: {
-        * fetchNotes({ cb }, { fetch, call, put }) {
-            const notes = yield call(fetch,'notes')
-            yield put({ type: 'change', key: 'notes', value: notes })
-            // if (notes.length != 0) {
-            //     yield put({ type: 'load', index: 0 })
-            // }
-        },
+        
     },
     event: {
         onReady(dispatch) {

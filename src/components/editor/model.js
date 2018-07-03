@@ -6,10 +6,17 @@ export default {
         notSave: false
     },
     reducers: {
-        createNote(state) {
-            const itemId = Date.parse(new Date()) / 1000
+        createNote(state, { itemId }) {
+            // const itemId = Date.parse(new Date()) / 1000
             return { ...state, itemId, content: '' }
         },
+        // createNote(state) {
+        //     const itemId = Date.parse(new Date()) / 1000
+        //     const newNotes = state.notes.slice(0)
+        //     newNotes.unshift([itemId, itemId, '', itemId])
+        //     return Object.assign({},state,{ index: 0, notes: newNotes })
+        // },
+
     },
     effects: {
         * saveNote({ callback }, { fetch, call, put, get }) {

@@ -6,7 +6,15 @@ export default {
         noteCore: null
 
     },
-    reducers: {},
+    reducers: {
+        * fetchNotes({ cb }, { fetch, call, put }) {
+            const notes = yield call(fetch,'notes')
+            yield put({ type: 'change', key: 'notes', value: notes })
+            // if (notes.length != 0) {
+            //     yield put({ type: 'load', index: 0 })
+            // }
+        },
+    },
     effects: {
         * post({ note }, { call, put }) {
             const itemId = note[1]
